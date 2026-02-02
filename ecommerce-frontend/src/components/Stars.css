@@ -1,0 +1,31 @@
+.stars-container {
+  z-index: -1;
+  display: flex;
+  gap: 4px;
+}
+
+.star {
+  position: relative;
+  line-height: 1;
+}
+
+.star.full {
+  color: rgb(119, 23, 52);
+}
+
+.star.empty {
+  color: #ddd;
+}
+
+.star.half {
+  color: #ddd;
+}
+
+.star.half::before {
+  content: '★';
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+  color: rgb(119, 23, 52);
+}
