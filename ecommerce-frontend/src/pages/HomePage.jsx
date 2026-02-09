@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { Stars } from '../components/Stars';
 import CheckmarkIcon from '../assets/images/icons/checkmark.png'
 
-export function HomePage() {
+export function HomePage({ cart }) {
     /*
     fetch(URL).then((response) => { response.json().then((data) => HERE MANIPULATE THE DATA)}) 
     => axios waits for fecth and gives directly the data.json()
@@ -13,7 +13,6 @@ export function HomePage() {
     */
 
     const [products, setProducts] = useState([]);
-    const [cart, setCart] = useState([]);
     
     useEffect(() => 
     {
@@ -21,12 +20,6 @@ export function HomePage() {
         {
             setProducts(response.data);
         })
-
-        axios.get('http://localhost:3000/api/cart-items').then((response) => 
-        {
-            setCart(response.data);
-        })
-
     }, []); // empty dependency array means that this code will run only once
 
     return (

@@ -6,7 +6,7 @@ import MobileLogo from '../../assets/images/mobile-logo.png'
 import CheckoutLockIcon from '../../assets/images/icons/checkout-lock-icon.png'
 
 
-export function CheckoutPage() {
+export function CheckoutPage({ cart }) {
     return (
         <>
             <title>Checkout</title>
