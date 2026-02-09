@@ -12,7 +12,7 @@ const defaultPort = defaultPorts[dbType];
 
 export let sequelize;
 
-if (isUsingRDS) {
+if (isUsingRDS) { // AWS RDS (Relational Database Service)
   sequelize = new Sequelize({
     database: process.env.RDS_DB_NAME,
     username: process.env.RDS_USERNAME,

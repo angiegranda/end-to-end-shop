@@ -52,17 +52,23 @@ app.get('*', (req, res) => {
   }
 });
 
+
+
 // Error handling middleware
 /* eslint-disable no-unused-vars */
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Something went wrong!' });
 });
+
+
 /* eslint-enable no-unused-vars */
 
-// Sync database and load default data if none exist
+
+// Sync database
 await sequelize.sync();
 
+// Load default data if none exist
 const productCount = await Product.count();
 if (productCount === 0) {
   const timestamp = Date.now();
@@ -98,6 +104,8 @@ if (productCount === 0) {
 
   console.log('Default data added to the database.');
 }
+
+
 
 // Start server
 app.listen(PORT, () => {

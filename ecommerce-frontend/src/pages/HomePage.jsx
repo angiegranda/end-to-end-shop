@@ -8,18 +8,23 @@ import CheckmarkIcon from '../assets/images/icons/checkmark.png'
 export function HomePage() {
     /*
     fetch(URL).then((response) => { response.json().then((data) => HERE MANIPULATE THE DATA)}) 
-    => axios does waits for fecth and gives directly the data.json()
+    => axios waits for fecth and gives directly the data.json()
     cleaner way to ask data to backend
     */
 
     const [products, setProducts] = useState([]);
+    const [cart, setCart] = useState([]);
     
     useEffect(() => 
     {
         axios.get('http://localhost:3000/api/products').then((response) => 
         {
-            console.log(response.data);
             setProducts(response.data);
+        })
+
+        axios.get('http://localhost:3000/api/cart-items').then((response) => 
+        {
+            setCart(response.data);
         })
 
     }, []); // empty dependency array means that this code will run only once
@@ -28,7 +33,7 @@ export function HomePage() {
         <>
             <title>Home</title>
 
-            <Header />
+            <Header cart={cart}/>
 
             <div className="home-page">
                 <div className="products-grid">
