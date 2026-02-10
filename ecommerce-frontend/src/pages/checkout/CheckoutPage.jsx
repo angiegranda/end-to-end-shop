@@ -17,7 +17,6 @@ export function CheckoutPage({ cart }) {
 
     useEffect(()=> {
         axios.get('/api/delivery-options?expand=estimatedDeliveryTime').then((response) => {
-            console.log(response.data);
             setDeliveryOptions(response.data);
         })
 
@@ -61,9 +60,11 @@ export function CheckoutPage({ cart }) {
                         })
                         return (
                         <div key={cartItem.productId} className="cart-item-container">
+                            {deliveryOptionSelected && 
                             <div className="delivery-date">
                                 {`Delivery date: ${dayjs(deliveryOptionSelected.estimatedDeliveryTimeMs).format('dddd, MMMM D')}`}
                             </div>
+                            }
                             
                             {/* Radio inputs should upadte the payment summary */}
                             <div className="cart-item-details-grid">
