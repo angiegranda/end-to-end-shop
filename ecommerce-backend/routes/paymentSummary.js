@@ -5,7 +5,7 @@ import { DeliveryOption } from '../models/DeliveryOption.js';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (_, res) => {
   const cartItems = await CartItem.findAll();
   let totalItems = 0;
   let productCostCents = 0;
