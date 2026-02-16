@@ -2,7 +2,7 @@ import { formatMoney } from "../../utils/Money";
 
 export function CartItemDetails({ cartItem }) {
   return (
-    <div key={cartItem.productId} className="cart-item-details-grid">
+    <>
       <img className="product-image"
         src={cartItem.product.image} />
 
@@ -25,6 +25,6 @@ export function CartItemDetails({ cartItem }) {
           </span>
         </div>
       </div>
-    </div>
+    </>
   );
 }

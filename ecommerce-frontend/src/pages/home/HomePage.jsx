@@ -13,13 +13,25 @@ export function HomePage({ cart }) {
 
     const [products, setProducts] = useState([]);
     
+    // useEffect(() => 
+    // {
+    //     axios.get('/api/products').then((response) => 
+    //     {
+    //         setProducts(response.data);
+    //     })
+    // }, []); // empty dependency array means that this code will run only once
+
+
     useEffect(() => 
     {
-        axios.get('http://localhost:3000/api/products').then((response) => 
-        {
+        // async-await is just syntactic sugar on top of Promises. It makes asynchronous code look synchronous.
+        const getHomeData = async () => {
+            const response = await axios.get('/api/products');
+            // await makes them execute sequentially, so the first line must finish before then next line runs
             setProducts(response.data);
-        })
-    }, []); // empty dependency array means that this code will run only once
+        }
+        getHomeData();
+    }, []);
 
     return (
         <>
