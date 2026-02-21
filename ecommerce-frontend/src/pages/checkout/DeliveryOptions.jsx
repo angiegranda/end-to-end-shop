@@ -9,13 +9,13 @@ export function DeliveryOptions( { cartItem, deliveryOptions, loadCart} ) {
         Choose a delivery option:
       </div>
       {deliveryOptions.map((deliveryOption) => {
-          const changeDeliveryOption = async () => {
-            const request = {
-              'quantity': cartItem.quantity,
-              'deliveryOptionId': deliveryOption.id,
-            }
-            await axios.put(`/api/cart-items/${cartItem.productId}`, request);
+        const changeDeliveryOption = async () => {
+          const request = {
+            'quantity': cartItem.quantity,
+            'deliveryOptionId': deliveryOption.id,
           }
+          await axios.put(`/api/cart-items/${cartItem.productId}`, request);
+        }
         let priceString = deliveryOption.priceCents <= 0 ?
           "FREE Shipping" :
           `$${formatMoney(deliveryOption.priceCents)} - Shipping`;
