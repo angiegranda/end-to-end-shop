@@ -33,7 +33,7 @@ export function OrderDetails( { orderId,  products, loadCart } ) {
               <div className="product-quantity">
                 Quantity: {orderProduct.quantity}
               </div>
-              <button className="buy-again-button button-primary" onClick={addProductToCart(orderProduct.productId, orderProduct.quantity)}>
+              <button className="buy-again-button button-primary" onClick={()=>{addProductToCart(orderProduct.productId, orderProduct.quantity)}}>
                 <img className="buy-again-icon" src={BuyAgainIcon} />
                 <span className="buy-again-message">Add to Cart</span>
               </button>
