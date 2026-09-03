@@ -10,18 +10,22 @@ export function DeliveryOptions( { cartItem, deliveryOptions, loadCart} ) {
       </div>
       {deliveryOptions.map((deliveryOption) => {
         const changeDeliveryOption = async () => {
-          const request = {
+          if (deliveryOption.id === cartItem.deliveryOptionId) {
+            return;
+          }
+          await axios.put(`/api/cart-items/${cartItem.productId}`, {
             'quantity': cartItem.quantity,
             'deliveryOptionId': deliveryOption.id,
-          }
-          await axios.put(`/api/cart-items/${cartItem.productId}`, request);
+          });
+          loadCart();
         }
         let priceString = deliveryOption.priceCents <= 0 ?
           "FREE Shipping" :
           `$${formatMoney(deliveryOption.priceCents)} - Shipping`;
         return (
-          <div key={deliveryOption.id} className="delivery-option" onClick={changeDeliveryOption} onChange={loadCart}>
-            <input type="radio" checked={deliveryOption.id === cartItem.deliveryOptionId} onChange={loadCart}
+          <div key={deliveryOption.id} className="delivery-option" onClick={changeDeliveryOption}>
+            <input type="radio" checked={deliveryOption.id === cartItem.deliveryOptionId}
+              onChange={() => {}}
               className="delivery-option-input"
               name={`delivery-option-${cartItem.productId}`} />
             <div>

@@ -1,10 +1,21 @@
 import CheckmarkIcon from '../../assets/images/icons/checkmark.png'
 import { Stars } from '../../components/Stars';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios'
 
 export function Product( {product, loadCart} ) {
   const [quantity, setQuantity] = useState(1);
+  const [isAdding, setIsAdding] = useState(false);
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
+  const addedTimeoutRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (addedTimeoutRef.current) {
+        clearTimeout(addedTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const updateSelectedQuantity = (event) => {
     const value = Number(event.target.value);
@@ -12,11 +23,25 @@ export function Product( {product, loadCart} ) {
   }
 
   const addProductToCart = async () => {
-    await axios.post(`/api/cart-items`, {
-      "productId": product.id,
-      "quantity": quantity
-    });
-    loadCart();
+    if (isAdding) {
+      return;
+    }
+    setIsAdding(true);
+    try {
+      await axios.post(`/api/cart-items`, {
+        "productId": product.id,
+        "quantity": quantity
+      });
+      await loadCart();
+      setQuantity(1);
+      setIsAddedToCart(true);
+      if (addedTimeoutRef.current) {
+        clearTimeout(addedTimeoutRef.current);
+      }
+      addedTimeoutRef.current = setTimeout(() => setIsAddedToCart(false), 2000);
+    } finally {
+      setIsAdding(false);
+    }
   }
 
   return (
@@ -58,12 +83,12 @@ export function Product( {product, loadCart} ) {
 
       <div className="product-spacer"></div>
 
-      <div className="added-to-cart">
+      <div className={`added-to-cart ${isAddedToCart ? 'added-to-cart-visible' : ''}`}>
         <img src={CheckmarkIcon} />
         Added
       </div>
 
-      <button className="add-to-cart-button button-primary" onClick={addProductToCart}>
+      <button className="add-to-cart-button button-primary" onClick={addProductToCart} disabled={isAdding}>
         Add to Cart
       </button>
     </div>

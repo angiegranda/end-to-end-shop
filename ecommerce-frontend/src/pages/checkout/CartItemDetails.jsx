@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { formatMoney } from "../../utils/Money";
 
 export function CartItemDetails({ cartItem, loadCart}) {
@@ -12,11 +12,11 @@ export function CartItemDetails({ cartItem, loadCart}) {
   const [quantity, setQuantity] = useState(1);
   const [isEditing, setIsEditing] = useState(false);
 
-  const updateQuantity = (event) => {
+  const updateQuantity = async (event) => {
     setIsEditing(false);
     const newVal = Number(event.target.value);
     setQuantity(newVal);
-    axios.put(`/api/cart-items/${cartItem.productId}`, { quantity: newVal });
+    await axios.put(`/api/cart-items/${cartItem.productId}`, { quantity: newVal });
     loadCart();
   }
 
@@ -38,7 +38,7 @@ export function CartItemDetails({ cartItem, loadCart}) {
           </span>
           <span className="update-quantity-link link-primary">
             {!isEditing ? <span onClick={()=>{setIsEditing(true);}}>Update</span> : (
-              <select value={quantity} onChange={updateQuantity}>
+              <select value={quantity} onChange={updateQuantity} autoFocus>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>

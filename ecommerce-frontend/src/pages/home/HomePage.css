@@ -122,6 +122,11 @@
   align-items: center;
   margin-bottom: 8px;
   opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.home-page .added-to-cart.added-to-cart-visible {
+  opacity: 1;
 }
 
 .home-page .added-to-cart img {
@@ -136,4 +141,26 @@
   margin-top: 1px;
   background-color:  rgb(66, 14, 23);
   font-weight: bold;
+}
+
+.home-page .add-to-cart-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.home-page .search-results-title {
+  padding: 20px 25px 5px;
+  font-size: 15px;
+  color: rgb(66, 14, 23);
+}
+
+.home-page .clear-search-link {
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.home-page .no-results-message {
+  padding: 60px 25px;
+  color: rgb(66, 14, 23);
+  font-size: 16px;
 }

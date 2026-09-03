@@ -31,7 +31,7 @@ export function TrackingPage( {cart} ) {
     })
 
     const totalDeliveryTimeMs = product.estimatedDeliveryTimeMs - order.orderTimeMs;
-    const timePassedMs = dayjs().valueOf(totalDeliveryTimeMs); // calculates the amount of time that has passed since the order
+    const timePassedMs = dayjs().valueOf() - order.orderTimeMs; // calculates the amount of time that has passed since the order
     let deliveryProgress = (timePassedMs / totalDeliveryTimeMs) * 100;
     if (deliveryProgress > 100) {
         deliveryProgress = 100;

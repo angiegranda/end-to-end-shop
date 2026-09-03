@@ -5,7 +5,7 @@ export function NotFoundPage( {cart} ) {
     return (
         <>
             <title>Not Found</title>
-            <Header />
+            <Header cart={cart} />
             <div className='not-found-message'>Not Found 404</div>
         </>
     );

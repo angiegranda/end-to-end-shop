@@ -213,3 +213,7 @@
   color: white;
   font-weight: bold;
 }
+.checkout-page .empty-cart-message {
+  padding: 60px 0;
+  font-size: 16px;
+}
